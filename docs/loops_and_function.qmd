@@ -1,0 +1,82 @@
+---
+title: "loops_and_function"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+weekdays <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday") 
+
+transects <- c("Transect_A", "Transect_B", "Transect_C")
+
+weekday_transect_matrix <- matrix(nrow = length(weekdays), ncol = length(transects))
+
+for (i in seq_along(weekdays)){ 
+  for( j in seq_along(transects)){
+  k <- paste0(weekdays[i],"_", transects[j])
+  weekday_transect_matrix[i,j] <- k
+  }
+  }
+  
+  
+```
+
+
+
+```{r}
+force_function <- function(mass, acceleration){
+  force <- mass * acceleration
+  print(paste("The resulting force is", force, "Newtons"))
+}
+
+force_function(mass = 10, acceleration = 2)
+
+
+```
+
+
+```{r}
+library(tidyverse)
+
+sci_names <- c("Chanos chanos", "Sphyraena barracuda",
+ "Caranx ignobilis")
+
+common_name <- c("milkfish", "great barracuda", "giant revally")
+
+a_est <- c(0.0905, 0.0181, 0.0353)
+
+b_est <- c(2.52, 3.27, 3.05)
+
+fish_parms <- data.frame(sci_names, common_name, a_est, b_est)
+
+ 
+
+fish_weight <- function(fish_name, tot_length) {
+  my_sub <- fish_parms |> filter(common_name == fish_name)
+weight <- my_sub$a_est * tot_length ^ (my_sub$b_est)
+return(weight)
+}
+
+fish_weight("milkfish", 7)
+```
+
+
+
+```{r}
+
+wave_power <- function(H, T) {
+  P <- .5 * H^2 * T
+  return(P)
+}
+
+H_seq <- seq(from= 0, to = 3, by=0.2)  
+
+wave_power(H_seq,8)  
+  
+
+
+
+
+```
+
